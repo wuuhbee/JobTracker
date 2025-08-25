@@ -9,7 +9,7 @@ builder.Services.AddControllersWithViews();
 // Service for DB Connection
 builder.Services.AddDbContext<JobContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Server=SYS-2UA60328MM\\SQLEXPRESS;Database=Jobs;Trusted_Connection=True;TrustServerCertificate=True;"));
+    options.UseSqlServer("Server=SYS-2UA60328MM\\SQLEXPRESS;Database=Jobs;Trusted_Connection=True;TrustServerCertificate=True;");
 });
 
 var app = builder.Build();
