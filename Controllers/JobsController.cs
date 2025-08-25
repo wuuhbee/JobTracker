@@ -22,7 +22,8 @@ namespace JobTracker.Controllers
         // GET: Jobs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Jobs.ToListAsync());
+            var jobContext = _context.Jobs.Include(j => j.Statuses);
+            return View(await jobContext.ToListAsync());
         }
 
         // GET: Jobs/Details/5
@@ -34,6 +35,7 @@ namespace JobTracker.Controllers
             }
 
             var job = await _context.Jobs
+                .Include(j => j.Statuses)
                 .FirstOrDefaultAsync(m => m.JobId == id);
             if (job == null)
             {
@@ -46,6 +48,7 @@ namespace JobTracker.Controllers
         // GET: Jobs/Create
         public IActionResult Create()
         {
+            ViewData["StatusId"] = new SelectList(_context.Statuses, "Id", "Id");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace JobTracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("JobId,JobTitle,CompanyName,Status,DateApplied")] Job job)
+        public async Task<IActionResult> Create([Bind("JobId,JobTitle,CompanyName,StatusId,DateApplied")] Job job)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace JobTracker.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["StatusId"] = new SelectList(_context.Statuses, "Id", "Id", job.StatusId);
             return View(job);
         }
 
@@ -78,6 +82,7 @@ namespace JobTracker.Controllers
             {
                 return NotFound();
             }
+            ViewData["StatusId"] = new SelectList(_context.Statuses, "Id", "Id", job.StatusId);
             return View(job);
         }
 
@@ -86,7 +91,7 @@ namespace JobTracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("JobId,JobTitle,CompanyName,Status,DateApplied")] Job job)
+        public async Task<IActionResult> Edit(int id, [Bind("JobId,JobTitle,CompanyName,StatusId,DateApplied")] Job job)
         {
             if (id != job.JobId)
             {
@@ -113,6 +118,7 @@ namespace JobTracker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["StatusId"] = new SelectList(_context.Statuses, "Id", "Id", job.StatusId);
             return View(job);
         }
 
@@ -125,6 +131,7 @@ namespace JobTracker.Controllers
             }
 
             var job = await _context.Jobs
+                .Include(j => j.Statuses)
                 .FirstOrDefaultAsync(m => m.JobId == id);
             if (job == null)
             {

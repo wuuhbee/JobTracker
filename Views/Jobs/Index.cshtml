@@ -1,0 +1,56 @@
+﻿@model IEnumerable<JobTracker.Models.Job>
+
+@{
+    ViewData["Title"] = "All Applications";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<head>
+    <link rel="stylesheet" href="~/css/Jobs.css" />
+</head>
+
+<p>
+    <a asp-action="Create" class="btn primary-button btn-sm"><i class="fa fa-plus"></i>Add New Application</a>
+</p>
+<table class="table table-bordered table-responsive table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.JobTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Statuses.StatusName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateApplied)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Statuses.StatusName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateApplied)
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.JobId" class="btn primary-button btn-sm"><i class="fa fa-pencil"></i></a> |
+                <a asp-action="Details" asp-route-id="@item.JobId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.JobId">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
