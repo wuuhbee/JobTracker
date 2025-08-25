@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 
 
-namespace JobTracker.JobContext
+namespace JobTracker.Context
 {
     public class JobContext : DbContext
     {

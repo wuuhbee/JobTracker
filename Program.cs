@@ -1,4 +1,4 @@
-using JobTracker.JobContext;
+using JobTracker.Context;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +9,7 @@ builder.Services.AddControllersWithViews();
 // Service for DB Connection
 builder.Services.AddDbContext<JobContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Server=SYS-2UA60328MM\\SQLEXPRESS;Database=Jobs;Trusted_Connection=True;TrustServerCertificate=True;"));
 });
 
 var app = builder.Build();
