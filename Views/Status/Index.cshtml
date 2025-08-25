@@ -1,13 +1,17 @@
 ﻿@model IEnumerable<JobTracker.Models.Status>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Status";
 }
 
-<h1>Index</h1>
+<h1>Status</h1>
+<head>
+    <link rel="stylesheet" href="~/css/Jobs.css"/>
+</head>
+
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn primary-button btn-sm"><i class="fa fa-plus"></i>Add new Status type</a>
 </p>
 <table class="table">
     <thead>
@@ -25,9 +29,9 @@
                 @Html.DisplayFor(modelItem => item.StatusName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn primary-button btn-sm"><i class="fa fa-pencil"></i></a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn secondary-button btn-sm"><i class="fa fa-navicon"></i></a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn fail-button btn-sm"><i class="fa fa-trash"></i></a>
             </td>
         </tr>
 }

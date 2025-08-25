@@ -7,3 +7,18 @@
     background-color: forestgreen;
     color: white;
 }
+
+.secondary-button {
+    background-color: cadetblue;
+    color: white;
+}
+
+.secondary-button:hover {
+    background-color: lightblue;
+    color: grey;
+}
+
+.fail-button {
+    background-color: darkred;
+    color:white;
+}
