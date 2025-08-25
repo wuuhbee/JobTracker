@@ -6,9 +6,12 @@
 
 <h1>Delete</h1>
 
+<head>
+    <link rel="stylesheet" href="~/css/Jobs.css" />
+</head>
+
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Job</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -39,7 +42,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="JobId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Delete" class="btn fail-button btn-sm" /> |
+        <a asp-action="Index" class="btn secondary-button btn-sm"><i class="fa fa-arrow-circle-left"></i> Back to List</a>
     </form>
 </div>
