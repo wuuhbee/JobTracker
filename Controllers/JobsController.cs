@@ -48,8 +48,15 @@ namespace JobTracker.Controllers
         // GET: Jobs/Create
         public IActionResult Create()
         {
-            ViewData["StatusId"] = new SelectList(_context.Statuses, "Id", "Id");
+            LoadStatuses();
+            ViewData["StatusId"] = new SelectList(_context.Statuses, "Id", "StatusName");
             return View();
+        }
+
+        private void LoadStatuses()
+        {
+            var statuses = _context.Statuses.ToList();
+            ViewBag.Statuses = new SelectList(statuses, "Id", "StatusName");
         }
 
         // POST: Jobs/Create
@@ -65,7 +72,7 @@ namespace JobTracker.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StatusId"] = new SelectList(_context.Statuses, "Id", "Id", job.StatusId);
+            ViewData["StatusId"] = new SelectList(_context.Statuses, "Id", "StatusName", job.StatusId);
             return View(job);
         }
 
