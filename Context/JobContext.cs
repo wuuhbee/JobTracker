@@ -11,6 +11,8 @@ namespace JobTracker.Context
         {
         }
 
+
+        public DbSet<Status> Statuses { get; set; }
         public DbSet<Job> Jobs { get; set; }
 
     }

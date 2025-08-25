@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JobTracker.Models
 {
@@ -12,7 +13,9 @@ namespace JobTracker.Models
         [Display(Name = "Company Name")]
         public string? CompanyName { get; set; }
 
-        public string? Status { get; set; }
+        [ForeignKey("Statuses")]
+        public int StatusId { get; set; }
+        public virtual Status? Statuses { get; set; }
 
         [Display(Name = "Date Applied")]
         [DataType(DataType.Date)]
