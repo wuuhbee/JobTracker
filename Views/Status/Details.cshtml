@@ -5,9 +5,11 @@
 }
 
 <h1>Details</h1>
+<head>
+    <link rel="stylesheet" href="~/css/Jobs.css" />
+</head>
 
 <div>
-    <h4>Status</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -19,6 +21,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn primary-button btn-sm">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
