@@ -1,0 +1,9 @@
+﻿.primary-button{
+    background-color: darkgreen;
+    color: white;
+}
+
+.primary-button:hover {
+    background-color: forestgreen;
+    color: white;
+}
