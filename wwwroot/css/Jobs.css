@@ -22,3 +22,7 @@
     background-color: darkred;
     color:white;
 }
+
+.small-btn {
+    padding:2px 4px;
+}
