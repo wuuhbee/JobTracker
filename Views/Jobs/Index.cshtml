@@ -47,8 +47,8 @@
             </td>
             <td>
                     <a asp-action="Edit" asp-route-id="@item.JobId" class="btn primary-button btn-sm"><i class="fa fa-pencil"></i></a> |
-                <a asp-action="Details" asp-route-id="@item.JobId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.JobId">Delete</a>
+                    <a asp-action="Details" asp-route-id="@item.JobId" class="btn secondary-button btn-sm"><i class="fa fa-navicon"></i></a> |
+                    <a asp-action="Delete" asp-route-id="@item.JobId" class="btn fail-button btn-sm"><i class="fa fa-trash"></i></a>
             </td>
         </tr>
     }
