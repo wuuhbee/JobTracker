@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using JobTracker.Context;
 using JobTracker.Models;
 
-namespace JobTracker.Views
+namespace JobTracker.Controllers
 {
     public class JobsController : Controller
     {
