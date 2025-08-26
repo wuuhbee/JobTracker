@@ -13,6 +13,7 @@
 <p>
     <a asp-action="Create" class="btn primary-button btn-sm"><i class="fa fa-plus"></i>Add New Application</a>
 </p>
+<hr />
 <table class="table table-bordered table-responsive table-hover">
     <thead>
         <tr>
@@ -24,7 +25,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Statuses.StatusName)
-                <a asp-action="AddStatus" class="btn secondary-button small-btn"><i class="fa fa-plus"></i></a>
+                <a asp-action="AddStatus" class="btn small-btn"><i class="fa fa-plus"></i></a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DateApplied)

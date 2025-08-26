@@ -26,3 +26,14 @@
 .small-btn {
     padding:2px 4px;
 }
+
+.table th {
+    background-color: cadetblue;
+    color: white;
+    text-align: left;
+    margin-top: 2px;
+}
+
+table tr:nth-child(even) {
+    background-color: lightgray;
+}
