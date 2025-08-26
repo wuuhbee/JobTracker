@@ -19,6 +19,11 @@ namespace JobTracker.Controllers
             _context = context;
         }
 
+        public IActionResult ToAllJobs()
+        {
+            return RedirectToAction("Index", "Jobs");
+        }
+
         // GET: Status
         public async Task<IActionResult> Index()
         {
