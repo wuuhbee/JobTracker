@@ -11,24 +11,46 @@
 </head>
 
 <p>
-    <a asp-action="Create" class="btn primary-button btn-sm"><i class="fa fa-plus"></i>Add New Application</a>
+    <a asp-action="Create" class="btn primary-button btn-sm"><i class="fa fa-plus"></i>Add New Application</a> |
+    <a asp-action="AddStatus" class="btn secondary-button btn-sm"><i class="fa fa-plus"></i>Add New Status Type</a>
 </p>
 <hr />
-<table class="table table-bordered table-responsive table-hover">
+<table class="table table-bordered table-responsive">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.JobTitle)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParam"]">@Html.DisplayNameFor(model => model.JobTitle)</a>
+                @if (ViewData["NameSortParam"].ToString() == "name_desc")
+                {
+                    <i class="fa fa-arrow-up"></i>
+                }
+                else
+                {
+                    <i class="fa fa-arrow-down"></i>
+                }
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CompanyName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Statuses.StatusName)
-                <a asp-action="AddStatus" class="btn small-btn"><i class="fa fa-plus"></i></a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["StatusSortParam"]">@Html.DisplayNameFor(model => model.Statuses.StatusName)</a>
+                @if (ViewData["StatusSortParam"].ToString() == "stat_desc")
+                {
+                    <i class="fa fa-arrow-up"></i>
+                }
+                else
+                {
+                    <i class="fa fa-arrow-down"></i>
+                }
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateApplied)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParam"]">@Html.DisplayNameFor(model => model.DateApplied)</a>
+                @if (ViewData["DateSortParam"].ToString() == "date_desc"){
+                    <i class="fa fa-arrow-up"></i>
+                }
+                else{
+                    <i class="fa fa-arrow-down"></i>
+                }
             </th>
         </tr>
     </thead>

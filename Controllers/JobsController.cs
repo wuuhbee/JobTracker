@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using JobTracker.Context;
 using JobTracker.Models;
+using Microsoft.IdentityModel.Tokens;
 
 namespace JobTracker.Controllers
 {
@@ -20,9 +21,36 @@ namespace JobTracker.Controllers
         }
 
         // GET: Jobs
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var jobContext = _context.Jobs.Include(j => j.Statuses);
+            var data = from j in _context.Jobs select j;
+            ViewData["NameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParam"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["StatusSortParam"] = string.IsNullOrEmpty(sortOrder) ? "stat_desc" : "Stat";
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    data = data.OrderByDescending(j => j.JobTitle);
+                    break;
+                case "Date":
+                    data = data.OrderBy(j => j.DateApplied);
+                    break;
+                case "date_desc":
+                    data = data.OrderByDescending(j => j.DateApplied);
+                    break;
+                case "stat_desc":
+                    data = data.OrderByDescending(j => j.StatusId);
+                    break;
+                case "Stat":
+                    data = data.OrderBy(j => j.StatusId);
+                    break;
+                default:
+                    data.OrderBy(j => j.JobTitle);
+                    break;
+            }
+
+            var jobContext = data.Include(j => j.Statuses);
             return View(await jobContext.ToListAsync());
         }
 
