@@ -7,7 +7,7 @@ namespace JobTracker.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Status Name")]
+        [Display(Name = "Status")]
         public string? StatusName { get; set; }
     }
 }
