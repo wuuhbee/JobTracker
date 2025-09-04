@@ -11,7 +11,7 @@ namespace JobTracker.Models
         [DataType(DataType.Date)]
         public DateTime DateAdded { get; set; }
 
-        [DisplayName("File")]
+        [DisplayName("File Name")]
         public required string FileName { get; set; }
 
         public required string FilePath { get; set; }
