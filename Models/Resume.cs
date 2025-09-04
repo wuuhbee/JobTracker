@@ -9,7 +9,7 @@ namespace JobTracker.Models
 
         [DisplayName("Date Added")]
         [DataType(DataType.Date)]
-        public DateTime DateAdded { get; set; }
+        public DateTime DateAdded { get; set; } = DateTime.Now;
 
         [DisplayName("File Name")]
         public required string FileName { get; set; }
