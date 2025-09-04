@@ -1,15 +1,19 @@
 ﻿@model IEnumerable<JobTracker.Models.Resume>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "All Resumes";
 }
 
-<h1>Index</h1>
+<h1>@ViewData["Title"]</h1>
+
+<head>
+    <link rel="stylesheet" href="~/css/Resumes.css" />
+</head>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn primary-btn btn-sm"><i class="fa fa-plus"> </i>Add a Resume</a>
 </p>
-<table class="table">
+<table class="table table-bordered table-responsive-md">
     <thead>
         <tr>
             <th>
