@@ -1,7 +1,18 @@
 using JobTracker.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.AI;
+using Microsoft.Extensions.Configuration;
+using OpenAI;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Configure app to authenticate the model
+IConfigurationRoot config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
+string? model = config["ModelName"];
+string? key = config["OpenAIKey"];
+
+IChatClient client =
+    (IChatClient) new OpenAIClient(key).GetChatClient(model);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
