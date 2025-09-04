@@ -20,8 +20,28 @@ namespace JobTracker.Controllers
         }
 
         // GET: Resumes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
+            var data = from r in _context.Resumes select r;
+            ViewData["DataSortParam"] = sortOrder == "data" ? "data_desc" : "data";
+            ViewData["NameSortParam"] = sortOrder == "name" ? "name_desc" : "name";
+
+            switch (sortOrder)
+            {
+                case "data_desc":
+                    data = data.OrderByDescending(r => r.DateAdded);
+                    break;
+                case "name_desc":
+                    data = data.OrderByDescending(r => r.FileName);
+                    break;
+                case "name":
+                    data = data.OrderBy(r => r.FileName);
+                    break;
+                default:
+                    data = data.OrderBy(r => r.DateAdded);
+                    break;
+            }
+
             return View(await _context.Resumes.ToListAsync());
         }
 

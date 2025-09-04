@@ -17,14 +17,14 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.DateAdded)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParam"]">@Html.DisplayNameFor(model => model.DateAdded)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FileName)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParam"]">@Html.DisplayNameFor(model => model.FileName)</a>
             </th>
-            <th>
+            @* <th>
                 @Html.DisplayNameFor(model => model.FilePath)
-            </th>
+            </th> *@
             <th></th>
         </tr>
     </thead>
@@ -37,12 +37,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.FileName)
             </td>
-            <td>
+            @* <td>
                 @Html.DisplayFor(modelItem => item.FilePath)
-            </td>
+            </td> *@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                @* Add button to open the file and next to it a button to direct to AI resume*@
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
