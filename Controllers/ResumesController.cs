@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using JobTracker.Context;
 using JobTracker.Models;
+using System.Runtime.CompilerServices;
 
 namespace JobTracker.Controllers
 {
@@ -23,7 +25,7 @@ namespace JobTracker.Controllers
         public async Task<IActionResult> Index(string sortOrder)
         {
             var data = from r in _context.Resumes select r;
-            ViewData["DataSortParam"] = sortOrder == "data" ? "data_desc" : "data";
+            ViewData["DateSortParam"] = sortOrder == "data" ? "data_desc" : "data";
             ViewData["NameSortParam"] = sortOrder == "name" ? "name_desc" : "name";
 
             switch (sortOrder)
@@ -74,15 +76,33 @@ namespace JobTracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,DateAdded,FileName,FilePath")] Resume resume)
+
+        public async Task<IActionResult> Create(ResumeViewModel model)
         {
             if (ModelState.IsValid)
             {
+                string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                string uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(model.ResumeFile.FileName);
+                string filepath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var fileStream = new FileStream(filepath, FileMode.Create))
+                {
+                    await model.ResumeFile.CopyToAsync(fileStream);
+                }
+
+                var resume = new Resume { DateAdded = model.DateAdded, FileName = model.FileName, FilePath = filepath};
                 _context.Add(resume);
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(resume);
+
+            return View(model);
         }
 
         // GET: Resumes/Edit/5

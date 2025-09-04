@@ -1,34 +1,35 @@
-﻿@model JobTracker.Models.Resume
+﻿@model JobTracker.Models.ResumeViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Add Resume";
 }
-
-<h1>Create</h1>
 
 <h4>Resume</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="form-group mb-4">
                 <label asp-for="DateAdded" class="control-label"></label>
                 <input asp-for="DateAdded" class="form-control" />
                 <span asp-validation-for="DateAdded" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-4">
                 <label asp-for="FileName" class="control-label"></label>
                 <input asp-for="FileName" class="form-control" />
                 <span asp-validation-for="FileName" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="FilePath" class="control-label"></label>
+            <div class="form-group mb-4">
+                @* <label asp-for="FilePath" class="control-label"></label>
                 <input asp-for="FilePath" class="form-control" />
-                <span asp-validation-for="FilePath" class="text-danger"></span>
+                <span asp-validation-for="FilePath" class="text-danger"></span> *@
+                <label asp-for="ResumeFile">Upload Resume</label>
+                <input asp-for="ResumeFile" type="file" class="form-control"/>
+                <span asp-validation-for="ResumeFile" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group mb-4">
+                <input type="submit" value="Submit" class="btn btn-primary" />
             </div>
         </form>
     </div>
